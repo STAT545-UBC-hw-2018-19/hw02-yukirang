@@ -1,0 +1,170 @@
+---
+title: "hw02_gapminder"
+output: github_document
+---
+## Including packages:
+```{r}
+library(gapminder)
+library(tidyverse)
+```
+## Explore the gapminder object:
+1.Is it a data.frame, a matrix, a vector, a list?
+```{r}
+is.data.frame(gapminder)
+is.matrix(gapminder)
+is.vector(gapminder)
+is.list(gapminder)
+```
+\-The results shows that the gapminder is a data.frame, also a list.
+
+2.What is its class?
+```{r}
+class(gapminder)
+```
+3.Number of variables/columns:
+```{r}
+ncol(gapminder)
+```
+4.Number of rows/observations:
+```{r}
+nrow(gapminder)
+```
+5.Can you get these facts about “extent” or “size” in more than one way? 
+
+The number of columns can also be obtained with the length() function:
+```{r}
+length(gapminder)
+```
+Besides, the dim() function is able to give both the number of rows and columns:
+```{r}
+dim(gapminder)
+```
+Can you imagine different functions being useful in different contexts?
+
+The str() function is used to examine data.frame. From the result we can get the number of observations and variables. Which also shows the type of each variables:  
+```{r}
+str(gapminder)
+```
+6.What data type is each variable?
+Apart from the str(), the sapply() function specifically gives the data type of each variable:
+```{r}
+sapply(gapminder, typeof)
+```
+
+## Explore individual variables:
+### The categorical variable I picked is continent.
+Possible values of continent?
+```{r}
+levels(gapminder$continent)
+```
+The frequency of each continent:
+```{r}
+summary(gapminder$continent)
+```
+The barchart is able to visualize the table above:
+```{r}
+ggplot(data=gapminder, aes(continent, fill=continent)) +
+  geom_bar()
+```
+
+Propotions of each fequency:
+```{r}
+table <- table(gapminder$continent)
+prop.table(table)
+```
+
+### The categorical variable I picked is lifeExp.
+
+Distinct values of 'lifeExp':
+```{r}
+unique(gapminder$lifeExp)
+```
+The typical values of lifeExp:
+```{r}
+summary(gapminder$lifeExp)
+```
+Range:
+```{r}
+diff(range(gapminder$lifeExp))
+```
+Variance:
+```{r}
+var(gapminder$lifeExp)
+```
+Standard deviation:
+```{r}
+sd(gapminder$lifeExp)
+```
+Try the combination of violin and jitter graph on lifeExp and continent:
+```{r}
+ggplot(gapminder, aes(continent, lifeExp, fill=continent)) +  
+  geom_violin() + 
+  geom_jitter(alpha=0.2)
+```
+
+## Explore various plot types:
+
+A scatterplot of two quantitative variables(lifeExp and pop)
+```{r}
+ggplot(gapminder, aes(lifeExp, pop)) + geom_point(alpha=0.08)
+```
+
+A plot of one quantitative variable. (A histogram and densityplot of lifeExp)
+```{r}
+ggplot(gapminder, aes(lifeExp))+
+  geom_histogram(aes(y=..density..),binwidth=3)+
+  geom_density()
+```
+
+A plot of one quantitative variable and one categorical. 
+
+Plot the lifeExp by continent with boxplot and scatterplot:
+```{r}
+a <- ggplot(gapminder, aes(continent, lifeExp, fill=continent))
+
+a + geom_boxplot()
+a + geom_point(alpha=0.1)
+```
+
+
+## Use filter(), select() and %>%
+Select the countries with lifeExp larger than 80 after 2000, and then make a scatterplot, coloured by continent:
+```{r}
+gapminder %>% 
+    select(lifeExp, country, continent) %>%
+    filter(lifeExp > 80) %>% 
+    ggplot(aes(country, lifeExp)) + geom_point(aes(colour = continent))
+```
+
+## But I want to do more!
+1.Evaluate this code and describe the result. Presumably the analyst’s intent was to get the data for Rwanda and Afghanistan. Did they succeed? Why or why not? If not, what is the correct way to do this?
+```{r}
+filter(gapminder, country == c("Rwanda", "Afghanistan"))
+```
+No. The c() function creates a vector combining two countries. The right way tis to choose the country separately:
+```{r}
+filter(gapminder, country == "Rwanda" | country == "Afghanistan")
+```
+2.Present numerical tables in a more attractive form.
+
+I choose the 'gormattable' library to display a table, where the values of quantitative variables can be compared by the shade or length of the color bars: 
+```{r}
+library(formattable)
+gapminder %>% 
+   select(lifeExp, gdpPercap, country, year) %>%
+    filter(lifeExp > 80) %>% 
+formattable(list(
+  lifeExp = color_tile("transparent", "lightblue"),
+  gdpPercap = color_bar("lightpink")
+))
+```
+
+3.Use more of the dplyr functions for operating on a single table.
+
+Randomly sample rows with sample_n():
+```{r}
+sample_n(gapminder, 8)
+```
+
+
+
