@@ -103,7 +103,6 @@ ggplot(gapminder, aes(continent, lifeExp, fill=continent)) +
 ```
 
 ## Explore various plot types:
-
 A scatterplot of two quantitative variables(lifeExp and pop)
 ```{r}
 ggplot(gapminder, aes(lifeExp, pop)) + geom_point(alpha=0.08)
@@ -147,7 +146,7 @@ filter(gapminder, country == "Rwanda" | country == "Afghanistan")
 ```
 2.Present numerical tables in a more attractive form.
 
-I choose the 'gormattable' library to display a table, where the values of quantitative variables can be compared by the shade or length of the color bars: 
+I choose the 'formattable' library to display a table, where the values of quantitative variables can be compared by the shade or length of the color bars: 
 ```{r}
 library(formattable)
 gapminder %>% 

@@ -9,14 +9,14 @@ library(gapminder)
 library(tidyverse)
 ```
 
-    ## ── Attaching packages ─────────────────────────────────────── tidyverse 1.2.1 ──
+    ## ── Attaching packages ────────────────────────────────── tidyverse 1.2.1 ──
 
     ## ✔ ggplot2 3.0.0     ✔ purrr   0.2.5
     ## ✔ tibble  1.4.2     ✔ dplyr   0.7.6
     ## ✔ tidyr   0.8.1     ✔ stringr 1.3.1
     ## ✔ readr   1.1.1     ✔ forcats 0.3.0
 
-    ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+    ## ── Conflicts ───────────────────────────────────── tidyverse_conflicts() ──
     ## ✖ dplyr::filter() masks stats::filter()
     ## ✖ dplyr::lag()    masks stats::lag()
 
@@ -546,7 +546,7 @@ filter(gapminder, country == "Rwanda" | country == "Afghanistan")
 
 2.Present numerical tables in a more attractive form.
 
-I choose the 'gormattable' library to display a table, where the values of quantitative variables can be compared by the shade or length of the color bars:
+I choose the 'formattable' library to display a table, where the values of quantitative variables can be compared by the shade or length of the color bars:
 
 ``` r
 library(formattable)
@@ -882,13 +882,13 @@ sample_n(gapminder, 8)
 ```
 
     ## # A tibble: 8 x 6
-    ##   country            continent  year lifeExp      pop gdpPercap
-    ##   <fct>              <fct>     <int>   <dbl>    <int>     <dbl>
-    ## 1 Comoros            Africa     1997    60.7   527982     1174.
-    ## 2 Togo               Africa     2007    58.4  5701579      883.
-    ## 3 Slovak Republic    Europe     1972    70.4  4593433     9674.
-    ## 4 Spain              Europe     2002    79.8 40152517    24835.
-    ## 5 Burkina Faso       Africa     1977    46.1  5889574      743.
-    ## 6 Tunisia            Africa     1962    49.6  4286552     1660.
-    ## 7 Angola             Africa     1992    40.6  8735988     2628.
-    ## 8 Dominican Republic Americas   1962    53.5  3453434     1662.
+    ##   country               continent  year lifeExp      pop gdpPercap
+    ##   <fct>                 <fct>     <int>   <dbl>    <int>     <dbl>
+    ## 1 Pakistan              Asia       1952    43.4 41346560      685.
+    ## 2 Venezuela             Americas   1957    57.9  6702668     9802.
+    ## 3 Montenegro            Europe     1997    75.4   692651     6466.
+    ## 4 Germany               Europe     1972    71   78717088    18016.
+    ## 5 Sao Tome and Principe Africa     1957    48.9    61325      861.
+    ## 6 Mauritius             Africa     1972    62.9   851334     2575.
+    ## 7 Switzerland           Europe     1982    76.2  6468126    28398.
+    ## 8 Kuwait                Asia       1992    75.2  1418095    34933.
